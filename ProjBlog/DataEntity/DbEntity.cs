@@ -18,6 +18,7 @@ namespace ProjBlog.DataEntity
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<User> User { get; set; }

@@ -5,8 +5,8 @@ using System.Web;
 using ProjBlog.Models.DataModel;
 namespace ProjBlog.Models.ViewModel
 {
-    public class UserViewModel
+    public class CategoryViewModel
     {
-        public List<User> ListUser { get; set; }
+        public List<Category> ListCategory { get; set; }
     }
 }

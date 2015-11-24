@@ -128,6 +128,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DataEntity\CategoryEntity.cs" />
     <Compile Include="DataEntity\DbEntity.cs" />
     <Compile Include="DataEntity\UserEntity.cs" />
     <Compile Include="Global.asax.cs">
@@ -137,6 +138,7 @@
     <Compile Include="Models\DataModel\Banner.cs" />
     <Compile Include="Models\DataModel\Category.cs" />
     <Compile Include="Models\DataModel\User.cs" />
+    <Compile Include="Models\ViewModel\CategoryViewModel.cs" />
     <Compile Include="Models\ViewModel\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -6,6 +6,7 @@ using ProjBlog.DataEntity;
 using log4net;
 using ProjBlog.Models.ViewModel;
 using ProjBlog.Models.DataModel;
+using System.Data.Entity;
 namespace ProjBlog.DataEntity
 {
     public class UserEntity
@@ -18,30 +19,48 @@ namespace ProjBlog.DataEntity
         }
         public void InsertNewUser(UserViewModel userViewModel)
         {
-            User u = new User();
-            u.Name = userViewModel.Name;
-            u.UserName = userViewModel.UserName;
-            db.User.Add(u);
+            List<User> lUser = userViewModel.ListUser;
+            foreach (User u in lUser)
+            {
+                db.User.Add(u);
+            }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                log.Error("Error Insert New User :" + e.Message, e);
+            }
+        }
+        public UserViewModel GetUserById(int? id)
+        {
+            UserViewModel uvm = new UserViewModel();
+            var query = db.User.Where(u => u.Id == id).ToList();
+            foreach(var u in query)
+            {
+                User user = new User();
+                user.Name = u.Name;
+                user.UserName = u.UserName;
+                uvm.ListUser.Add(user);
+            }
+            return uvm;
+        }
+        public void UpdateUser(UserViewModel userViewModel)
+        {
+            List<User> lUser = userViewModel.ListUser;
+            foreach(User u in lUser)
+            {
+                db.Entry(u).State = EntityState.Modified;
+            }
             try
             {
                 db.SaveChanges();
             }
             catch(Exception e)
             {
-                log.Error("Error Insert New User", e);
+                log.Error("Error Update User : " + e.Message, e);
             }
-        }
-        public UserViewModel GetUserById(int? id)
-        {
-            UserViewModel uvm = null;
-            var query = db.User.Where(u => id == null ? u.Id == null : u.Id == id).ToList();
-            foreach(var u in query)
-            {
-                uvm = new UserViewModel();
-                uvm.Name = u.Name;
-                uvm.UserName = u.UserName;
-            }
-            return uvm;
         }
     }
 }
